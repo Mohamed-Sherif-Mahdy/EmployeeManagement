@@ -1,5 +1,5 @@
-
 using EmployeeManagement_API.Data;
+using EmployeeManagement_API.Repository;
 
 namespace EmployeeManagement_API
 {
@@ -18,6 +18,9 @@ namespace EmployeeManagement_API
 
 
       builder.Services.AddDbContext<EmployeeManagemendtDbContext>();
+      builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+      builder.Services.AddScoped<IJobs, JobsRepository>();
+
       var app = builder.Build();
 
       // Configure the HTTP request pipeline.
