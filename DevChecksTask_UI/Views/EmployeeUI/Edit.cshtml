@@ -1,7 +1,7 @@
 ﻿@model EmployeeManagement_API.Dto.EmployeeWithJobTitleDto
 
 @{
-    ViewData["Title"] = "Create";
+  ViewData["Title"] = "Create";
 }
 
 <h1 class="accordion-header m-3">Add Employee</h1>
@@ -14,20 +14,20 @@
     <span asp-validation-for="Name" class="text-danger"></span>
   </div>
   <div class="form-group m-3">
-    <select asp-for="JobTitle" >
+    <select asp-for="JobTitle">
       <label asp-for="JobTitle">Job Role:</label>
-    <option value="">-- Select a Job --</option>
-    @foreach (var job in @ViewBag.JobTitles)
-    {
-      <option asp-value="@job">@job</option>
-    }
-    
+      <option value="">-- Select a Job --</option>
+      @foreach (var job in @ViewBag.JobTitles)
+      {
+        <option asp-value="@job">@job</option>
+      }
+
     </select>
     <span asp-validation-for="JobTitle" class="text-danger"></span>
   </div>
   <div class="form-group m-3">
     <label>Gender:</label>
-    <div >
+    <div>
       <input type="radio" id="male" asp-for="Gender" value="Male" />
       <label for="male">Male</label>
       <input type="radio" id="female" asp-for="Gender" value="Female" />
@@ -58,5 +58,7 @@
 </div>
 
 @section Scripts {
-    @{Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  @{
+    Html.RenderPartialAsync("_ValidationScriptsPartial");
+  }
 }

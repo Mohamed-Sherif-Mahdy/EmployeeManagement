@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<EmployeeManagement_API.Dto.EmployeeWithJobTitleDto>
 @{
-  ViewData["Title"] = "Index";
+  ViewData["Title"] = "Data";
 }
 
-<h1>Index</h1>
+<h1>Data</h1>
 
 <p>
   <a asp-action="Create">Create New</a>
 </p>
+
+<div class="row">
+<div class="col-md-6">
 <table class="table">
   <thead>
     <tr>
@@ -28,7 +31,7 @@
   <tbody>
     @foreach (var item in Model)
     {
-      <tr>
+      <tr onclick="details(@item.EmployeeId)">
         <td>
           @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -42,11 +45,48 @@
       
 
         <td>
-          @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-          @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-          @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+          <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit|</a>
+          <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
+          
         </td>
       </tr>
     }
   </tbody>
 </table>
+</div>
+
+<div class="col-md-6" id="details" style="float:"></div>
+    </div>
+
+<style>
+    tr:hover {
+      background-color: #f2f2f2;
+      cursor: pointer;
+    }
+
+  
+  
+
+</style>
+
+@section Scripts{
+  	<script>
+		function details(id) {
+      //run details in partial view
+      //get id of the object
+      console.log(id);
+      //pass id to the controller
+      //get the details of the object
+      //display the details in the partial view
+      var id = id;
+      $.ajax({
+        url: '/employeeui/Details',
+				type: 'GET',
+        data: { id: id },
+				success: function (result) {
+          document.getElementById("details").innerHTML = result;
+				}
+			});
+		}
+	</script>
+}
