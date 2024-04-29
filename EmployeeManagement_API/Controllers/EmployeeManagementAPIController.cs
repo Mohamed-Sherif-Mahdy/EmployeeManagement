@@ -54,6 +54,7 @@ namespace EmployeeManagement_API.Controllers
 
 
     [HttpPut("{id}")]
+
     public IActionResult PutEmployee(int id, EmployeeWithJobTitleDto employeeWithJobTitleDto)
     {
 
@@ -75,7 +76,7 @@ namespace EmployeeManagement_API.Controllers
     }
 
 
-    //link: https://localhost:44329/api/Employee
+
     [HttpPost]
     public IActionResult PostEmployee(EmployeeWithJobTitleDto employeeWithJobTitleDto)
     {
