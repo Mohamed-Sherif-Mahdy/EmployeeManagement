@@ -1,0 +1,62 @@
+﻿@model EmployeeManagement_API.Dto.EmployeeWithJobTitleDto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add Employee</h1>
+<hr />
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form method="post">
+  <div class="form-group">
+    <label asp-for="Name">Name:</label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <select asp-for="JobTitle" >
+      <label asp-for="JobTitle">Job Role:</label>
+    <option value="">-- Select a Job --</option>
+    @foreach (var job in @ViewBag.JobTitles)
+    {
+      <option asp-value="@job">@job</option>
+    }
+    
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Gender:</label>
+    <div>
+      <input type="radio" id="male" asp-for="Gender" value="Male" />
+      <label for="male">Male</label>
+      <input type="radio" id="female" asp-for="Gender" value="Female" />
+      <label for="female">Female</label>
+      <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" asp-for="IsFirstAppointment" />
+      <label class="form-check-label" asp-for="IsFirstAppointment">First Appointment</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label asp-for="StartDate">Start Date:</label>
+    <input type="date" asp-for="StartDate" class="form-control" />
+    <span asp-validation-for="StartDate" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Notes">Notes:</label>
+    <textarea asp-for="Notes" class="form-control"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
