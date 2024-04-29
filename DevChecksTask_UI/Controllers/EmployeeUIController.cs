@@ -11,7 +11,7 @@ namespace DevChecksTask_UI.Controllers
     public EmployeeUIController()
     {
       _client = new HttpClient();
-      _client.BaseAddress = new Uri("http://localhost:5046/api/");
+      _client.BaseAddress = new Uri("https://localhost:44341/api/");
 
     }
     [HttpGet]
