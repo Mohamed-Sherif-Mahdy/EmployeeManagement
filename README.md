@@ -27,10 +27,14 @@ This project implements a web application for managing employee information, all
   + Enforces data integrity before form submission
   + Style the form using CSS or Bootstrap for an improved user experience
 
-## Watch Demo
+## preview of form
+
+![form](https://github.com/Mohamed-Sherif-Mahdy/EmployeeManagement/assets/68203318/e0827211-a82f-4df4-8b5e-687d004340ac)
+![add page](https://github.com/Mohamed-Sherif-Mahdy/EmployeeManagement/assets/68203318/cc48b133-8bd2-4fc7-831d-8b8ca431c57f)
+![details](https://github.com/Mohamed-Sherif-Mahdy/EmployeeManagement/assets/68203318/d24fc1db-77cc-4289-93fe-1ef9253c52d9)
 
 
-https://github.com/Mohamed-Sherif-Mahdy/EmployeeManagement/assets/68203318/4360f8eb-03bb-4e64-b551-27dfcc36af2b
+
 
 
 
