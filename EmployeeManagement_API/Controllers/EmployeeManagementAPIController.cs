@@ -30,7 +30,6 @@ namespace EmployeeManagement_API.Controllers
       return Ok(employeeWithJobTitleDtos);
     }
 
-
     [HttpGet("{id}")]
     public IActionResult GetEmployee(int id)
     {
@@ -43,18 +42,7 @@ namespace EmployeeManagement_API.Controllers
       return Ok(EmployeeRepository.EmployeeWithJobTitleDto(employee));
     }
 
-
-
-    //[HttpGet("JobTitles")]
-    //public IActionResult GetJobTitles()
-    //{
-    //  List<string> jobTitles = jobs.GetJobs();
-    //  return Ok(jobTitles);
-    //}
-
-
     [HttpPut("{id}")]
-
     public IActionResult PutEmployee(int id, EmployeeWithJobTitleDto employeeWithJobTitleDto)
     {
 
