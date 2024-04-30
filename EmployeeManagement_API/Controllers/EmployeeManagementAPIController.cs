@@ -45,12 +45,12 @@ namespace EmployeeManagement_API.Controllers
 
 
 
-    [HttpGet("JobTitles")]
-    public IActionResult GetJobTitles()
-    {
-      List<string> jobTitles = jobs.GetJobs();
-      return Ok(jobTitles);
-    }
+    //[HttpGet("JobTitles")]
+    //public IActionResult GetJobTitles()
+    //{
+    //  List<string> jobTitles = jobs.GetJobs();
+    //  return Ok(jobTitles);
+    //}
 
 
     [HttpPut("{id}")]

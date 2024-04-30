@@ -31,7 +31,7 @@ namespace DevChecksTask_UI.Controllers
     public IActionResult Create()
     {
       //get job titles
-      HttpResponseMessage response = _client.GetAsync("EmployeeManagementAPI/JobTitles").Result;
+      HttpResponseMessage response = _client.GetAsync("JobAPI").Result;
       if (response.IsSuccessStatusCode)
       {
         var data = response.Content.ReadAsStringAsync().Result;
@@ -58,7 +58,7 @@ namespace DevChecksTask_UI.Controllers
     {
       HttpResponseMessage response = _client.GetAsync($"EmployeeManagementAPI/{id}").Result;
       //get job titles
-      HttpResponseMessage responseJobTitles = _client.GetAsync("EmployeeManagementAPI/JobTitles").Result;
+      HttpResponseMessage responseJobTitles = _client.GetAsync("JobAPI").Result;
       if (responseJobTitles.IsSuccessStatusCode)
       {
         var dataJobTitles = responseJobTitles.Content.ReadAsStringAsync().Result;
