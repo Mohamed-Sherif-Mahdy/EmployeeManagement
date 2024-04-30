@@ -2,8 +2,8 @@
 This project implements a web application for managing employee information, allowing users to add, view, update, and delete employee records.
 
 ## Technologies Used:
-- Frontend: ASP.NET Core MVC (or Razor Pages)
-* Backend: ASP.NET Core API
++ Frontend: ASP.NET Core MVC
++ Backend: ASP.NET Core API
 + Database: SQL Server
 + Language: C#
 
@@ -22,10 +22,10 @@ This project implements a web application for managing employee information, all
   + Handles form data submission and validation
   + Saves valid data to the database
   + Provides appropriate responses for success and failure cases
-  + (Bonus) Implements server-side validation
+  + Implements server-side validation
 - **Client-Side Validation:**
   + Enforces data integrity before form submission
-  + (Bonus) Style the form using CSS or Bootstrap for an improved user experience
+  + Style the form using CSS or Bootstrap for an improved user experience
 
 ## Watch Demo
 
