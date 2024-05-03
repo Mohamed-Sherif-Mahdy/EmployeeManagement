@@ -1,4 +1,4 @@
-﻿using EmployeeManagement_API.Repository;
+﻿using EmployeeManagement_API.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement_API.Controllers
@@ -7,16 +7,16 @@ namespace EmployeeManagement_API.Controllers
   [ApiController]
   public class JobAPIController : ControllerBase
   {
-    IJobs jobs;
-    public JobAPIController(IJobs JobsRePo)
+    private readonly IServiceJob _jobs;
+    public JobAPIController(IServiceJob jobs)
     {
-      jobs = JobsRePo;
+      _jobs = jobs;
     }
 
     [HttpGet]
     public IActionResult GetJobTitles()
     {
-      List<string> jobTitles = jobs.GetJobs();
+      List<string> jobTitles = _jobs.GetJobs();
       return Ok(jobTitles);
     }
 

@@ -1,6 +1,5 @@
 ﻿using EmployeeManagement_API.Dto;
 using EmployeeManagement_API.Models;
-using EmployeeManagement_API.Repository;
 using EmployeeManagement_API.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,22 +16,23 @@ namespace EmployeeManagement_API.Controllers
     //  EmployeeRepository = EmpRepo;
     //  jobs = JobsRePo;
     //}
-    private readonly IServiceEmployee EmployeeRepository;
-    private readonly IRepository<Job> jobs;
-    public EmployeeManagementAPIController(IServiceEmployee employeeRepository, IRepository<Job> jobs)
+    private readonly IServiceEmployee EmployeeService;
+    private readonly IServiceJob JobService;
+    //private readonly IRepository<Job> jobs;
+    public EmployeeManagementAPIController(IServiceEmployee employeeRepository, IServiceJob jobService)
     {
-      EmployeeRepository = employeeRepository;
-      this.jobs = jobs;
+      EmployeeService = employeeRepository;
+      JobService = jobService;
     }
 
     [HttpGet]
     public IActionResult GetEmployees()
     {
-      List<Employee> employees = EmployeeRepository.GetEmployeesWithjobs();
+      List<Employee> employees = EmployeeService.GetEmployeesWithjobs();
       List<EmployeeWithJobTitleDto> employeeWithJobTitleDtos = new List<EmployeeWithJobTitleDto>();
       foreach (Employee employee in employees)
       {
-        employeeWithJobTitleDtos.Add(EmployeeRepository.EmployeeWithJobTitleDto(employee));
+        employeeWithJobTitleDtos.Add(EmployeeService.EmployeeWithJobTitleDto(employee));
       }
 
       return Ok(employeeWithJobTitleDtos);
@@ -41,20 +41,20 @@ namespace EmployeeManagement_API.Controllers
     [HttpGet("{id}")]
     public IActionResult GetEmployee(int id)
     {
-      Employee employee = EmployeeRepository.FitchEmployee(id);
+      Employee employee = EmployeeService.FitchEmployee(id);
 
       if (employee == null)
       {
         return NotFound();
       }
-      return Ok(EmployeeRepository.EmployeeWithJobTitleDto(employee));
+      return Ok(EmployeeService.EmployeeWithJobTitleDto(employee));
     }
 
     [HttpPut("{id}")]
     public IActionResult PutEmployee(int id, EmployeeWithJobTitleDto employeeWithJobTitleDto)
     {
 
-      if (!EmployeeRepository.EmployeeExists(id))
+      if (!EmployeeService.EmployeeExists(id))
       {
         return NotFound();
       }
@@ -63,10 +63,10 @@ namespace EmployeeManagement_API.Controllers
         return BadRequest(ModelState);
       }
 
-      Employee DataBaseEmployee = EmployeeRepository.FitchEmployee(id);
-      Employee employee = EmployeeRepository.EmployeeReMap(employeeWithJobTitleDto);
+      Employee DataBaseEmployee = EmployeeService.FitchEmployee(id);
+      Employee employee = EmployeeService.EmployeeReMap(employeeWithJobTitleDto);
       employee.EmployeeId = DataBaseEmployee.EmployeeId;
-      EmployeeRepository.UpdateEmployee(DataBaseEmployee, employee);
+      EmployeeService.UpdateEmployee(DataBaseEmployee, employee);
 
       return Ok(employee);
 
@@ -82,7 +82,7 @@ namespace EmployeeManagement_API.Controllers
         return BadRequest(ModelState);
       }
 
-      EmployeeRepository.AddEmployee(EmployeeRepository.EmployeeReMap(employeeWithJobTitleDto));
+      EmployeeService.AddEmployee(EmployeeService.EmployeeReMap(employeeWithJobTitleDto));
       return CreatedAtAction("GetEmployee", new { id = employeeWithJobTitleDto.EmployeeId }, employeeWithJobTitleDto);
 
     }
@@ -91,12 +91,12 @@ namespace EmployeeManagement_API.Controllers
     public IActionResult DeleteEmployee(int id)
     {
 
-      Employee employee = EmployeeRepository.FitchEmployee(id);
+      Employee employee = EmployeeService.FitchEmployee(id);
       if (employee == null)
       {
         return NotFound();
       }
-      EmployeeRepository.DeleteEmployee(employee);
+      EmployeeService.DeleteEmployee(employee);
 
       return NoContent();
     }

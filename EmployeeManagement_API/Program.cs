@@ -19,10 +19,9 @@ namespace EmployeeManagement_API
 
 
       builder.Services.AddDbContext<EmployeeManagemendtDbContext>();
-      builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
       builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
       builder.Services.AddScoped<IServiceEmployee, ServiceEmployee>();
-      builder.Services.AddScoped<IJobs, JobsRepository>();
+      builder.Services.AddScoped<IServiceJob, ServiceJob>();
 
       var app = builder.Build();
 
