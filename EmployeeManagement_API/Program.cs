@@ -1,5 +1,6 @@
 using EmployeeManagement_API.Data;
 using EmployeeManagement_API.Repository;
+using EmployeeManagement_API.Service;
 
 namespace EmployeeManagement_API
 {
@@ -19,6 +20,8 @@ namespace EmployeeManagement_API
 
       builder.Services.AddDbContext<EmployeeManagemendtDbContext>();
       builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+      builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+      builder.Services.AddScoped<IServiceEmployee, ServiceEmployee>();
       builder.Services.AddScoped<IJobs, JobsRepository>();
 
       var app = builder.Build();

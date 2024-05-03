@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement_API.Dto;
 using EmployeeManagement_API.Models;
 using EmployeeManagement_API.Repository;
+using EmployeeManagement_API.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement_API.Controllers
@@ -9,18 +10,25 @@ namespace EmployeeManagement_API.Controllers
   [ApiController]
   public class EmployeeManagementAPIController : ControllerBase
   {
-    IEmployeeRepository EmployeeRepository;
-    IJobs jobs;
-    public EmployeeManagementAPIController(IEmployeeRepository EmpRepo, IJobs JobsRePo)
+    //IEmployeeRepository EmployeeRepository;
+    //IJobs jobs;
+    //public EmployeeManagementAPIController(IEmployeeRepository EmpRepo, IJobs JobsRePo)
+    //{
+    //  EmployeeRepository = EmpRepo;
+    //  jobs = JobsRePo;
+    //}
+    private readonly IServiceEmployee EmployeeRepository;
+    private readonly IRepository<Job> jobs;
+    public EmployeeManagementAPIController(IServiceEmployee employeeRepository, IRepository<Job> jobs)
     {
-      EmployeeRepository = EmpRepo;
-      jobs = JobsRePo;
+      EmployeeRepository = employeeRepository;
+      this.jobs = jobs;
     }
 
     [HttpGet]
     public IActionResult GetEmployees()
     {
-      List<Employee> employees = EmployeeRepository.GetEmployees();
+      List<Employee> employees = EmployeeRepository.GetEmployeesWithjobs();
       List<EmployeeWithJobTitleDto> employeeWithJobTitleDtos = new List<EmployeeWithJobTitleDto>();
       foreach (Employee employee in employees)
       {
@@ -57,6 +65,7 @@ namespace EmployeeManagement_API.Controllers
 
       Employee DataBaseEmployee = EmployeeRepository.FitchEmployee(id);
       Employee employee = EmployeeRepository.EmployeeReMap(employeeWithJobTitleDto);
+      employee.EmployeeId = DataBaseEmployee.EmployeeId;
       EmployeeRepository.UpdateEmployee(DataBaseEmployee, employee);
 
       return Ok(employee);
