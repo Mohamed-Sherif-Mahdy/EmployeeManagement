@@ -13,20 +13,12 @@ namespace EmployeeManagement_API.Service
       _repository = repository;
       _repositoryJob = repositoryJob;
     }
-    public void AddEmployee(Employee employee)
-    {
-      _repository.Insert(employee);
-    }
+    public void AddEmployee(Employee employee) => _repository.Insert(employee);
 
-    public void DeleteEmployee(Employee employee)
-    {
-      _repository.Delete(employee);
-    }
+    public void DeleteEmployee(Employee employee) => _repository.Delete(employee);
 
-    public bool EmployeeExists(int id)
-    {
-      return _repository.Exists(e => e.EmployeeId == id);
-    }
+    public bool EmployeeExists(int id) => _repository.Exists(e => e.EmployeeId == id);
+
 
     public Employee EmployeeReMap(EmployeeWithJobTitleDto employeeWithJobTitleDto)
     {
@@ -54,20 +46,13 @@ namespace EmployeeManagement_API.Service
       return employeeWithJobTitleDto;
     }
 
-    public Employee FitchEmployee(int id)
-    {
-      List<Employee> employees = GetEmployeesWithjobs();
-      return employees.FirstOrDefault(e => e.EmployeeId == id);
-    }
+    public Employee FitchEmployee(int id) => GetEmployeesWithjobs().FirstOrDefault(e => e.EmployeeId == id);
 
-    public List<Employee> GetEmployeesWithjobs()
-    {
-      return _repository.GetWithInclude("Job");
-    }
+    public List<Employee> GetEmployeesWithjobs() => _repository.GetWithInclude("Job");
 
-    public void UpdateEmployee(Employee DataBaseEmployee, Employee employee)
-    {
-      _repository.Update(DataBaseEmployee, employee);
-    }
+
+    public void UpdateEmployee
+      (Employee DataBaseEmployee, Employee employee) => _repository.Update(DataBaseEmployee, employee);
+
   }
 }

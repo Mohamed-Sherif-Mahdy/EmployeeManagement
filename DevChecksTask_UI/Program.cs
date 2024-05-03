@@ -1,28 +1,28 @@
 namespace DevChecksTask_UI
 {
-  public class Program
-  {
-    public static void Main(string[] args)
+    public class Program
     {
-      var builder = WebApplication.CreateBuilder(args);
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-      // Add services to the container.
-      builder.Services.AddControllersWithViews();
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
 
-      var app = builder.Build();
+            var app = builder.Build();
 
+            app.UseStaticFiles();
 
-      app.UseStaticFiles();
+            app.UseRouting();
 
-      app.UseRouting();
+            app.UseAuthorization();
 
-      app.UseAuthorization();
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=employeeui}/{action=Index}/{id?}"
+            );
 
-      app.MapControllerRoute(
-          name: "default",
-          pattern: "{controller=employeeui}/{action=Index}/{id?}");
-
-      app.Run();
+            app.Run();
+        }
     }
-  }
 }
