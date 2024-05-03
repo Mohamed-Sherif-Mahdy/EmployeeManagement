@@ -3,6 +3,7 @@ using EmployeeManagement_API.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
+
 namespace EmployeeManagement_API.Repository
 {
   public class Repository<T> : IRepository<T> where T : class
@@ -29,6 +30,7 @@ namespace EmployeeManagement_API.Repository
       return _context.Set<T>().Where(expression).ToList();
     }
 
+
     public List<T> GetAll()
     {
       return _context.Set<T>().ToList();
@@ -42,6 +44,13 @@ namespace EmployeeManagement_API.Repository
     public List<T> GetWithInclude(Expression<Func<T, object>> include)
     {
       return _context.Set<T>().Include(include).ToList();
+    }
+    public List<T> GetWithInclude(string include)
+    {
+
+      return _context.Set<T>().Include(include).ToList();
+
+
     }
 
     public void Insert(T entity)

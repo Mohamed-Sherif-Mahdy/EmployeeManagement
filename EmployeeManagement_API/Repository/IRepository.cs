@@ -6,6 +6,7 @@ namespace EmployeeManagement_API.Repository
   {
     List<T> GetAll();
     T GetBy(Expression<Func<T, bool>> expression);
+
     List<T> Get(Expression<Func<T, bool>> expression);
     void Insert(T entity);
     void Update(T entity);
@@ -14,5 +15,6 @@ namespace EmployeeManagement_API.Repository
     bool Exists(Expression<Func<T, bool>> expression);
     List<T> GetWithInclude(Expression<Func<T, object>> include);
 
+    List<T> GetWithInclude(string include);
   }
 }

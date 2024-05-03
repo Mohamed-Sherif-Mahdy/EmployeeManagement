@@ -57,13 +57,12 @@ namespace EmployeeManagement_API.Service
     public Employee FitchEmployee(int id)
     {
       List<Employee> employees = GetEmployeesWithjobs();
-      return employees.Find(e => e.EmployeeId == id);
-      //return _repository.GetBy(e => e.EmployeeId == id);
+      return employees.FirstOrDefault(e => e.EmployeeId == id);
     }
 
     public List<Employee> GetEmployeesWithjobs()
     {
-      return _repository.GetWithInclude(e => e.Job);
+      return _repository.GetWithInclude("Job");
     }
 
     public void UpdateEmployee(Employee DataBaseEmployee, Employee employee)
